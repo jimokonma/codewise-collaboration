@@ -5,13 +5,20 @@ interface CodeEditorProps {
   value: string;
   onChange: (value: string) => void;
   language: string;
+  onCursorMove?: (position: { line: number; column: number }) => void;
 }
 
-const CodeEditor = ({ value, onChange, language }: CodeEditorProps) => {
+const CodeEditor = ({ value, onChange, language, onCursorMove }: CodeEditorProps) => {
   const [isEditorReady, setIsEditorReady] = useState(false);
 
-  const handleEditorDidMount = () => {
+  const handleEditorDidMount = (editor: any) => {
     setIsEditorReady(true);
+    
+    // Track cursor position changes
+    editor.onDidChangeCursorPosition((e: any) => {
+      const position = e.position;
+      onCursorMove?.({ line: position.lineNumber, column: position.column });
+    });
   };
 
   const handleEditorChange = (value: string | undefined) => {

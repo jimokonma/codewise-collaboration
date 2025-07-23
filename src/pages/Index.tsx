@@ -12,11 +12,25 @@ const Index = () => {
   const [css, setCss] = useState('body {\n  font-family: Arial, sans-serif;\n  margin: 0;\n  padding: 20px;\n  background: #f0f0f0;\n}\n\nh1 {\n  color: #333;\n}');
   const [javascript, setJavascript] = useState('console.log("CodeTogether is ready!");');
   
-  const { isConnected, connectedUsers, emitCodeChange } = useSocket({
+  const { isConnected, connectedUsers, emitCodeChange, emitCursorMove, currentUserId } = useSocket({
     sessionId,
-    onCodeChange: (code, language) => {
+    onCodeChange: (code, language, userId) => {
       // Handle incoming code changes from other users
-      console.log('Received code change:', { code: code.length, language });
+      console.log('Received code change from:', userId);
+      switch (language) {
+        case 'html':
+          setHtml(code);
+          break;
+        case 'css':
+          setCss(code);
+          break;
+        case 'javascript':
+          setJavascript(code);
+          break;
+      }
+    },
+    onCursorMove: (userId, position, userName) => {
+      console.log('Cursor move from:', userName, position);
     },
   });
 
@@ -77,6 +91,7 @@ const Index = () => {
                 value={html}
                 onChange={(value) => handleCodeChange(value, 'html')}
                 language="html"
+                onCursorMove={emitCursorMove}
               />
             </TabsContent>
             
@@ -85,6 +100,7 @@ const Index = () => {
                 value={css}
                 onChange={(value) => handleCodeChange(value, 'css')}
                 language="css"
+                onCursorMove={emitCursorMove}
               />
             </TabsContent>
             
@@ -93,6 +109,7 @@ const Index = () => {
                 value={javascript}
                 onChange={(value) => handleCodeChange(value, 'javascript')}
                 language="javascript"
+                onCursorMove={emitCursorMove}
               />
             </TabsContent>
           </Tabs>
