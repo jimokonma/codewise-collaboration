@@ -1,15 +1,9 @@
 import { createClient } from '@supabase/supabase-js';
 
-// For demo purposes, using a public Supabase instance
-// In production, you'd use your own Supabase project
-const supabaseUrl = 'https://demo.supabase.co';
-const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZS1kZW1vIiwicm9sZSI6ImFub24iLCJleHAiOjE5ODM4MTI5OTZ9.CRXP1A7WOeoJeXxjNni43kdQwgnWNReilDMblYTn_I0';
+const supabaseUrl = 'https://lazwjsdjeiwwyslzpelb.supabase.co';
+const supabaseAnonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imxhendqc2RqZWl3d3lzbHpwZWxiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTMyNDk4MjAsImV4cCI6MjA2ODgyNTgyMH0.60gPCPVHshuK3FNVW4m1HgPQkvMX7YkthKp4izlsLyo';
 
-// For a real app, you'd set up your own Supabase project with these environment variables:
-// const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
-// const supabaseKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
-
-export const supabase = createClient(supabaseUrl, supabaseKey);
+export const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
 export interface CollaborationEvent {
   id?: string;
