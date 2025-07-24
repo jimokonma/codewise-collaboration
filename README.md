@@ -10,7 +10,7 @@
 
 ## 📸 Screenshot
 
-![CodeTogether Application](/snapshot.png)
+![CodeTogether Application](/public//snapshot.png)
 
 *CodeTogether's intuitive interface featuring a file explorer, Monaco code editor, and live preview panel*
 
